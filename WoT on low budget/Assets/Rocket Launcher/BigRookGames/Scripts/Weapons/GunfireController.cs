@@ -13,6 +13,7 @@ namespace BigRookGames.Weapons
 
         // --- Muzzle ---
         public GameObject muzzlePrefab;
+        public Rigidbody AddRecoilTo;
         public GameObject RoundSpawn;
         public GameObject muzzlePosition;
 
@@ -35,7 +36,7 @@ namespace BigRookGames.Weapons
         public GameObject projectileToDisableOnFire;
 
         // --- Timing ---
-        [SerializeField] private float timeLastFired;
+        public float timeLastFired;
 
 
         private void Start()
@@ -80,7 +81,7 @@ namespace BigRookGames.Weapons
 
             // --- Spawn muzzle flash ---
             var flash = Instantiate(muzzlePrefab, muzzlePosition.transform);
-
+            AddRecoilTo.AddForceAtPosition(muzzlePosition.transform.forward.normalized * -4,muzzlePosition.transform.position,ForceMode.VelocityChange);
             // --- Shoot Projectile Object ---
             if (projectilePrefab != null)
             {

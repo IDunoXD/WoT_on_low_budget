@@ -19,6 +19,8 @@ public class TowerNGun : MonoBehaviour
     bool ClosestPass;
     void Update()
     {
+        //Turret lock
+        if((Input.GetKey(KeyCode.Mouse1))) return;
         //Tower Rotation
         if(ZrotSet==360) ZrotSet=0;
         Tpass = T.localEulerAngles.y - ZrotSet;

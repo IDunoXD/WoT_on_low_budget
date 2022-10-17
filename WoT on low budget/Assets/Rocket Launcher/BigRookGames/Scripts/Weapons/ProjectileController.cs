@@ -101,6 +101,7 @@ namespace BigRookGames.Weapons
             GameObject newExplosion = Instantiate(rocketExplosion, transform.position, rocketExplosion.transform.rotation, null);
             if(hit.transform.gameObject.layer==6){
                 TargetHit.PlayOneShot(TargetHit.clip);
+                Destroy(hit.transform.gameObject,1);
                 Debug.Log("target");
             }
             Debug.Log("hit");

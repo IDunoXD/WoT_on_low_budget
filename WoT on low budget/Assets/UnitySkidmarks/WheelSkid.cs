@@ -18,7 +18,8 @@ public class WheelSkid : MonoBehaviour {
 
 	WheelCollider wheelCollider;
 	WheelHit wheelHitInfo;
-
+	AudioSource source;
+	public GameObject smoke;
 	const float SKID_FX_SPEED = 3f; // Min side slip speed in m/s to start showing a skid
 	const float MAX_SKID_INTENSITY = 10.0f; // m/s where skid opacity is at full intensity
 	const float WHEEL_SLIP_MULTIPLIER = 0.1f; // For wheelspin. Adjust how much skids show
@@ -29,6 +30,7 @@ public class WheelSkid : MonoBehaviour {
 
 	protected void Awake() {
 		wheelCollider = GetComponent<WheelCollider>();
+		source = GetComponent<AudioSource>();
 	}
 	protected void FixedUpdate() {
 		lastFixedUpdateTime = Time.time;
@@ -64,9 +66,14 @@ public class WheelSkid : MonoBehaviour {
 			// Skid if we should
 			if (skidTotal >= SKID_FX_SPEED) {
 				float intensity = Mathf.Clamp01(skidTotal / MAX_SKID_INTENSITY);
+				source.volume=Mathf.Lerp(0.1f,0.2f,Mathf.InverseLerp(3,30,skidTotal));
+				if(!source.isPlaying)
+					source.Play();
 				// Account for further movement since the last FixedUpdate
 				Vector3 skidPoint = wheelHitInfo.point + (rb.velocity * (Time.time - lastFixedUpdateTime)); // + rb.velocity.normalized * 0.15f
 				//Debug.Log(carForwardVel);
+				var flash = Instantiate(smoke, transform);
+				Destroy(flash,1);
 				if (Vector3.Magnitude(rb.velocity)<0.01f){
 					skidPoint += (transform.forward * BrakeSkidSize);
 					//Debug.Log(transform.forward);
@@ -76,6 +83,7 @@ public class WheelSkid : MonoBehaviour {
 			}
 			else {
 				lastSkid = -1;
+				source.volume=0;
 			}
 		}
 		else {

@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 600
+  s: {fileID: 6866443929410732473, guid: 9a335c7d76d4c5248aa8c1f97e48407f, type: 3}
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 1
