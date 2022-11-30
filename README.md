@@ -10,3 +10,5 @@
  Stylized Rocket Launcher Complete Kit - shooter for turret
 	
  My YouTube Dev updates [Playlist](https://youtube.com/playlist?list=PLTWweHDDRLXQUnMoX01dFKrgxi1LspR9i)
+
+ Windows build: https://drive.google.com/drive/folders/1AQ_vbIV7UsMgY64LBBGWZ7NDoT48BAEs?usp=sharing
